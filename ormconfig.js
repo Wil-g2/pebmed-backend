@@ -1,6 +1,12 @@
 require('dotenv/config');
 
 module.exports = {
+  ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false
+    },
+  },
   type: process.env.DB_TYPE,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
