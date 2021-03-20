@@ -43,7 +43,7 @@ class UpdatePatientService {
       );
     }
 
-    const newVacancy = {
+    const newPatient = {
       name,
       phone,
       email,
@@ -53,9 +53,9 @@ class UpdatePatientService {
       weight,
     };
 
-    const vacancy = this.patientRepository.merge(checkExist, newVacancy);
+    const patient = this.patientRepository.merge(checkExist, newPatient);
 
-    return vacancy;
+    return patient;
   }
 }
 export default UpdatePatientService;

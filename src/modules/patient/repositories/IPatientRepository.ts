@@ -1,7 +1,7 @@
 import Patient from '../infra/typeorm/entities/Patient';
 import ICreatePatientDTO from '../dtos/ICreatePatientDTO';
 
-export default interface IVacancyRepository {
+export default interface IPatientRepository {
   findAll(): Promise<Patient[]>;
   findById(id: string): Promise<Patient | undefined>;
   delete(user_id: string): Promise<void>;

@@ -42,7 +42,7 @@ export default class PatientController {
         weight,
       } = request.body;
       const createPatientService = container.resolve(CreatePatientService);
-      const vacancy = await createPatientService.execute({
+      const patient = await createPatientService.execute({
         name,
         phone,
         email,
@@ -52,7 +52,7 @@ export default class PatientController {
         weight,
       });
 
-      return response.status(201).json(vacancy);
+      return response.status(201).json(patient);
     } catch (err) {
       throw new AppError(err.message);
     }
