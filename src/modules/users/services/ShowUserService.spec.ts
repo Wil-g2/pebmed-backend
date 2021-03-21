@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 import { v4 as uuid } from 'uuid';
+import * as faker from 'faker';
 import ShowUserService from './ShowUserService';
 import CreateUserService from './CreateUserService';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
@@ -18,9 +19,9 @@ describe('Show a user', () => {
     const showUser = new ShowUserService(fakeUsersRepository);
 
     const user = await createUser.execute({
-      full_name: 'Will',
-      email: 'teste@teste.com',
-      password: '123456',
+      full_name: faker.name.firstName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
       role: 1,
     });
 

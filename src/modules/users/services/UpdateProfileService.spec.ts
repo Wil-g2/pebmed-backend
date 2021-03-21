@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 import { v4 as uuid } from 'uuid';
+import * as faker from 'faker';
 import FakeUserRepostitory from '../repositories/fakes/FakeUsersRepository';
 import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserService from './CreateUserService';
@@ -28,29 +29,33 @@ describe('UpdateProfile', () => {
   });
 
   it('should be able update a user', async () => {
+    const email = faker.internet.email();
+
     const user = await createUserService.execute({
-      full_name: 'Will',
-      email: 'teste@teste.com',
-      password: '123456',
+      full_name: faker.name.firstName(),
+      email,
+      password: faker.internet.password(),
       role: 1,
     });
 
+    const full_name = faker.name.firstName();
+
     const userUpdate = await updateProfileService.execute({
       id: user.id,
-      full_name: 'Update',
-      email: 'teste1@teste.com',
+      full_name,
+      email,
     });
 
-    expect(userUpdate.full_name).toEqual('Update');
-    expect(userUpdate.email).toEqual('teste1@teste.com');
+    expect(userUpdate.full_name).toEqual(full_name);
+    expect(userUpdate.email).toEqual(email);
   });
 
   it('should be not able update a user that does not exist', async () => {
     return expect(
       updateProfileService.execute({
         id: uuid(),
-        full_name: 'Update',
-        email: 'teste1@teste.com',
+        full_name: faker.name.firstName(),
+        email: faker.internet.email(),
         role: 1,
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -58,47 +63,49 @@ describe('UpdateProfile', () => {
 
   it('should be not able update a user when Old password does not match', async () => {
     const user = await createUserService.execute({
-      full_name: 'Will',
-      email: 'teste@teste.com',
-      password: '123456',
+      full_name: faker.name.firstName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
       role: 1,
     });
 
     await expect(
       updateProfileService.execute({
         id: user.id,
-        full_name: 'Update',
+        full_name: faker.name.firstName(),
         role: 1,
-        email: 'testeupdate@teste.com',
-        password: '123456',
-        current_password: 'current_password',
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        current_password: faker.internet.password(),
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
   it('should be not able update a user when email already exist', async () => {
+    const email = faker.internet.email();
+
     const user = await createUserService.execute({
-      full_name: 'Will',
-      email: 'will@teste.com',
-      password: '123456',
+      full_name: faker.name.firstName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
       role: 1,
     });
 
     await createUserService.execute({
-      full_name: 'Other user',
-      email: 'teste@teste.com',
-      password: '123456',
+      full_name: faker.name.firstName(),
+      email,
+      password: faker.internet.password(),
       role: 1,
     });
 
     await expect(
       updateProfileService.execute({
         id: user.id,
-        full_name: 'Update',
+        full_name: faker.name.firstName(),
         role: 1,
-        email: 'teste@teste.com',
-        password: '123456',
-        current_password: 'current_password',
+        email,
+        password: faker.internet.password(),
+        current_password: faker.internet.password(),
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

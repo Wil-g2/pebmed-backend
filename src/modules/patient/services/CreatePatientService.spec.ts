@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import * as faker from 'faker';
 import CreatePatientService from './CreatePatientService';
 import FakePatientRepository from '../repositories/fakes/FakePatientRepository';
 
@@ -10,17 +11,18 @@ describe('CreatePatient', () => {
       fakePatientRepository,
     );
 
+    const email = faker.internet.email();
     const patient = await createPatientService.execute({
-      name: 'Willian',
-      phone: '+553555555555',
-      email: 'will@teste.com',
+      name: faker.name.firstName(1),
+      phone: faker.phone.phoneNumberFormat(),
+      email,
       birth_date: new Date('2000-01-01'),
       gender: 1,
-      height: 75.6,
-      weight: 80,
+      height: faker.random.float(),
+      weight: faker.random.float(),
     });
 
     expect(patient).toHaveProperty('id');
-    expect(patient.email).toBe('will@teste.com');
+    expect(patient.email).toBe(email);
   });
 });

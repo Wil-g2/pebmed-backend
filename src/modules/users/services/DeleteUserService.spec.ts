@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import AppError from '@shared/errors/AppError';
 import { v4 as uuid } from 'uuid';
+import * as faker from 'faker';
 import DeleteUserService from './DeleteUserService';
 import CreateUserService from './CreateUserService';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
@@ -26,9 +27,9 @@ describe('Delete User', () => {
 
   it('should be able delete a user', async () => {
     const user = await createUserService.execute({
-      full_name: 'Will',
-      email: 'teste@teste.com',
-      password: '123456',
+      full_name: faker.name.firstName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
       role: 1,
     });
 
@@ -38,10 +39,6 @@ describe('Delete User', () => {
   });
 
   it('should not be able delete a user that does not exist', async () => {
-    // const fakeUsersRepository = new FakeUsersRepository();
-
-    // const deleteUser = new DeleteUserService(fakeUsersRepository);
-
     return expect(deleteUserService.execute(uuid())).rejects.toBeInstanceOf(
       AppError,
     );

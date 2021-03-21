@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { v4 as uuid } from 'uuid';
+import * as faker from 'faker';
 import AppError from '@shared/errors/AppError';
 import ShowPatientService from './ShowPatientService';
 import CreatePatientService from './CreatePatientService';
@@ -17,19 +18,20 @@ describe('ShowPatient', () => {
     showPatientService = new ShowPatientService(fakePatientRepository);
   });
 
+  const email = faker.internet.email();
   it('should select an specific patient', async () => {
     const patient = await createPatientService.execute({
-      name: 'Willian',
-      phone: '+553555555555',
-      email: 'will@teste.com',
+      name: faker.name.firstName(1),
+      phone: faker.phone.phoneNumberFormat(),
+      email,
       birth_date: new Date('2000-01-01'),
       gender: 1,
-      height: 75.6,
-      weight: 80,
+      height: faker.random.float(),
+      weight: faker.random.float(),
     });
 
     expect(patient).toHaveProperty('id');
-    expect(patient.email).toBe('will@teste.com');
+    expect(patient.email).toBe(email);
 
     expect(await showPatientService.execute(patient.id)).toBe(patient);
   });
