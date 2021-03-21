@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/AppError';
+import NotFoundError from '@shared/errors/NotFoundError';
 import IScheduleRepository from '../repositories/IScheduleRepository';
 
 @injectable()
@@ -14,11 +14,7 @@ class DeleteScheduleService {
     const checkExist = await this.scheduleRepository.findById(id);
 
     if (!checkExist) {
-      throw new AppError(
-        'Schedule does not exist',
-        404,
-        'error-api:schedule-not-found',
-      );
+      throw new NotFoundError('Schedule');
     }
 
     await this.scheduleRepository.delete(id);

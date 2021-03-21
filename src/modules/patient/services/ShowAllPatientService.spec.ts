@@ -4,17 +4,8 @@ import ShowAllPatientService from './ShowAllPatientService';
 import CreatePatientService from './CreatePatientService';
 import FakePatientRepository from '../repositories/fakes/FakePatientRepository';
 import Patient from '../infra/typeorm/entities/Patient';
-// let fakePatientRepository: FakePatientRepository;
-// let createPatientService: CreatePatientService;
-// let showAllPatientService: ShowAllPatientService;
 
 describe('ShowAllPatients', () => {
-  // beforeEach(() => {
-  //   fakePatientRepository = new FakePatientRepository();
-  //   createPatientService = new CreatePatientService(fakePatientRepository);
-  //   showAllPatientService = new ShowAllPatientService(fakePatientRepository);
-  // });
-
   it('should list all patients', async () => {
     const fakePatientRepository = new FakePatientRepository();
     const createPatientService = new CreatePatientService(

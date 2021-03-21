@@ -3,6 +3,7 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 
 import User from '@modules/users/infra/typeorm/entities/User';
+import NotFoundError from '@shared/errors/NotFoundError';
 import IUserRepository from '../repositories/IUsersRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 
@@ -29,11 +30,7 @@ class UpdateProfileService {
     const user = await this.usersRepository.findById(data.id);
 
     if (!user) {
-      throw new AppError(
-        'User does not exist',
-        404,
-        'error-api:user-not-exist',
-      );
+      throw new NotFoundError('User');
     }
 
     if (data.password && data.current_password) {

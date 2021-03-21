@@ -1,7 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/AppError';
 import { parseISO, startOfHour } from 'date-fns';
+import NotFoundError from '@shared/errors/NotFoundError';
 import IScheduleRepository from '../repositories/IScheduleRepository';
 import scheduleValidation from '../utils/validation';
 import Schedule from '../infra/typeorm/entities/Schedule';
@@ -31,11 +31,7 @@ class UpdateScheduleService {
     const checkExist = await this.scheduleRepository.findById(id);
 
     if (!checkExist) {
-      throw new AppError(
-        'Schedule does not exist',
-        404,
-        'error-api:schedule-not-found',
-      );
+      throw new NotFoundError('Schedule');
     }
     const current_date = date || checkExist.date;
     const hourStart = startOfHour(parseISO(current_date.toISOString()));
