@@ -10,6 +10,7 @@ import {
 import { v4 } from 'uuid';
 import User from '@modules/users/infra/typeorm/entities/User';
 import Patient from '@modules/patient/infra/typeorm/entities/Patient';
+import { Exclude } from 'class-transformer';
 
 @Entity('schedules')
 class Schedule {
@@ -23,6 +24,7 @@ class Schedule {
   date: Date;
 
   @Column()
+  @Exclude()
   patient_id: string;
 
   @ManyToOne(() => Patient, patient => patient.schedules)
@@ -30,6 +32,7 @@ class Schedule {
   patient: Patient;
 
   @Column()
+  @Exclude()
   user_id: string;
 
   @ManyToOne(() => User, user => user.schedules)

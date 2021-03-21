@@ -19,6 +19,7 @@ class ScheduleRepository implements IScheduleRepository {
   public async findByUser(user_id: string): Promise<Schedule[]> {
     return this.ormRepository.find({
       where: { user_id },
+      relations: ['user', 'patient'],
     });
   }
 
