@@ -5,6 +5,7 @@ import ShowScheduleService from '@modules/schedule/services/ShowScheduleService'
 import ShowScheduleByUserService from '@modules/schedule/services/ShowScheduleByUserService';
 import UpdateScheduleService from '@modules/schedule/services/UpdateScheduleService';
 import DeleteScheduleService from '@modules/schedule/services/DeleteScheduleService';
+import { classToClass } from 'class-transformer';
 
 export default class ScheduleController {
   async showScheduleByUser(
@@ -17,14 +18,14 @@ export default class ScheduleController {
     );
     const schedule = await showScheduleByUserService.execute(id);
 
-    return response.status(200).json(schedule);
+    return response.status(200).json(classToClass(schedule));
   }
 
   async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
     const showScheduleService = container.resolve(ShowScheduleService);
     const schedule = await showScheduleService.execute(id);
-    return response.status(200).json(schedule);
+    return response.status(200).json(classToClass(schedule));
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
