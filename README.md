@@ -1,4 +1,5 @@
 # pebmed-backend
+
 Para desenvolver a aplicação foi utilizado alguns princípios do SOLID e clean Architecture utilizando o typeORM e banco de dados Postgres
 
 # Padrão de commit do Git Semantic Commit Messages usado no repositório:
@@ -15,48 +16,51 @@ Para desenvolver a aplicação foi utilizado alguns princípios do SOLID e clean
 
 ## Instalando
 
-Obs.: É necessário antes de instalar este projeto, ter instalado e rodando node.js: 
-* Nodejs (https://nodejs.org/en/)
+Obs.: É necessário antes de instalar este projeto, ter instalado e rodando node.js:
+
+- Nodejs (https://nodejs.org/en/)
 
 para fazer a instalação das dependências do projeto você pode utilizar o yarn ou utilizar npm
 
 Para instalá-lo em sua máquina faça os comandos a seguir:
 
-``` bash
+```bash
   git clone https://github.com/Wil-g2/pebmed-backend.git
-  cd pebmed-backend 
+  cd pebmed-backend
 ```
 
 ## Baixando dependências
+
 acesse a pasta backend e execute o comando:
 
-``` bash   
+```bash
   yarn ou npm install
 ```
 
 ## Executando o projeto
+
 Após baixar as dependências vamos precisar de um postgres para rodar as migrations do projeto se tiver docker instalado na máquina pode criar um banco de dados ou pode usar o docker usando o comando abaixo para subir um postgres usando o docker:
 
-``` bash
-  docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres    
+```bash
+  docker run --name postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres
 ```
 
 copiar o arquivo .env.example para um .env e alterar as variáveis de ambiente
 
-``` bash 
+```bash
   cp .env.example .env
 ```
 
 Para rodar as migrations pode usar o comando abaixo
 
-``` bash
+```bash
   yarn migrations ou npm run migrations
 ```
 
 Para rodar o projeto local tem q comentar a parte de ssl no ormconfig.js, pois tive que subir com ssl para o heroku
 require('dotenv/config');
 
-``` javascript
+```javascript
 module.exports = {
   // ssl: false,
   // extra: {
@@ -76,12 +80,11 @@ module.exports = {
     migrationsDir: process.env.DB_MIGRATIONS_DIR,
   },
 };
-
 ```
 
-Para rodar o projeto usando o docker-compose use os comandos abaixo:
+Para rodar o projeto usando o docker-compose use os comandos abaixo, alterar o DB_HOST no docker se for utilizar o docker-compose usar "pebmed-db":
 
-``` bash
+```bash
   docker-compose build
   docker-compose up
 ```
@@ -90,11 +93,12 @@ Para rodar o projeto usando o docker-compose use os comandos abaixo:
 ![image](https://user-images.githubusercontent.com/26700193/111928630-fa0dd180-8a92-11eb-896c-8d3654cdd478.png)
 
 ### Backend hospedado no Heroku
+
 Caso quiser testar a API está no heroku também endereço abaixo
 
 https://pebmed.herokuapp.com/
 
-### Testes 
+### Testes
 
 No backend tem alguns arquivos com a extensão .spec.ts onde se encontra alguns testes de unitários da API
 
@@ -103,43 +107,49 @@ Para executá-los os testes basta executar o comando:
 ```bash
   yarn test ou npm run test
 ```
+
 se quiser rodar com coverage
 
 ```bash
-  yarn test-cover ou npm run test-cover 
+  yarn test-cover ou npm run test-cover
 ```
 
-### Backend Ferramentas e Bibliotecas 
+### Backend Ferramentas e Bibliotecas
 
 ### Padrão de Código
+
 - ESLint
-- Prettier 
+- Prettier
 - Lint-staged
 - Husky
 - git-commit-msg-linter (para manter padrão nas mensagens de commmit)
 
 ### Gerenciando variáveis ambiente
+
 - Dotenv
 
 ### Documentação da API
+
 - Postman
 - Isomnia JSON
-- HAR
 
 ### Teste da Aplicação
+
 -Jest
 -Supertest
 -faker
 
 ### Container
+
 -Docker
 
 ### Backend
+
 -Node.js
 -Express
 -TypeORM
 -Celebrate (para validação)
--ts-node-dev 
+-ts-node-dev
 -Cors
 -Helmet (para segurança da aplicação)
 -bcryptjs
@@ -149,13 +159,16 @@ se quiser rodar com coverage
 -pg
 
 ### Frontend
+
 -ReactJS
 -styled-components
 
 ### Aplicação
+
 Alguns prints da aplicação
 
-### Teste Insomnia 
+### Teste Insomnia
+
 ![image](https://user-images.githubusercontent.com/26700193/111925430-9df18000-8a87-11eb-85cd-f1b5b0d6f860.png)
 
 ![image](https://user-images.githubusercontent.com/26700193/111925447-b19ce680-8a87-11eb-8963-c2dca98f34c0.png)
@@ -184,8 +197,6 @@ https://dbdiagram.io/d/60515987ecb54e10c33bc672
 
 ![image](https://user-images.githubusercontent.com/26700193/111925782-02f9a580-8a89-11eb-987e-2a920097db7f.png)
 
-
-
 ### Cobertura de Testes
 
 ![image](https://user-images.githubusercontent.com/26700193/111926077-1e18e500-8a8a-11eb-8885-6dd97bd7d539.png)
@@ -194,19 +205,20 @@ https://dbdiagram.io/d/60515987ecb54e10c33bc672
 ![image](https://user-images.githubusercontent.com/26700193/111926186-92538880-8a8a-11eb-8f91-f14325456d27.png)
 ![image](https://user-images.githubusercontent.com/26700193/111926195-98e20000-8a8a-11eb-953e-7fa6e0029823.png)
 
-
 ### CI Github Actions
+
 ![image](https://user-images.githubusercontent.com/26700193/111926216-b2834780-8a8a-11eb-9132-d301d478ea3b.png)
 
 ### Frontend
+
 ![image](https://user-images.githubusercontent.com/26700193/111936643-ebc8b100-8aa4-11eb-90b6-070fe475a5e8.png)
 ![image](https://user-images.githubusercontent.com/26700193/111936660-f5521900-8aa4-11eb-8e36-bf30ed86e71f.png)
 ![image](https://user-images.githubusercontent.com/26700193/111936708-0b5fd980-8aa5-11eb-8bb5-4af9cad9371b.png)
 
 ![image](https://user-images.githubusercontent.com/26700193/111936633-e2d7df80-8aa4-11eb-9a23-e7e7434365b6.png)
 
-  
 ## Autor
+
 Willian Gaudencio de Rezende
 Email: <wil-g2@hotmail.com>
 Linkedin: <https://www.linkedin.com/in/willian-gaudencio-38864312b/>
