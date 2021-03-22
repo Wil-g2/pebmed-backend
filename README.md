@@ -199,6 +199,12 @@ https://dbdiagram.io/d/60515987ecb54e10c33bc672
 ![image](https://user-images.githubusercontent.com/26700193/111926216-b2834780-8a8a-11eb-9132-d301d478ea3b.png)
 
 ### Frontend
+![image](https://user-images.githubusercontent.com/26700193/111936643-ebc8b100-8aa4-11eb-90b6-070fe475a5e8.png)
+![image](https://user-images.githubusercontent.com/26700193/111936660-f5521900-8aa4-11eb-8e36-bf30ed86e71f.png)
+![image](https://user-images.githubusercontent.com/26700193/111936708-0b5fd980-8aa5-11eb-8bb5-4af9cad9371b.png)
+
+![image](https://user-images.githubusercontent.com/26700193/111936633-e2d7df80-8aa4-11eb-9a23-e7e7434365b6.png)
+
   
 ## Autor
 Willian Gaudencio de Rezende
