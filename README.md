@@ -53,6 +53,47 @@ Para rodar as migrations pode usar o comando abaixo
   yarn migrations ou npm run migrations
 ```
 
+Para rodar o projeto local tem q comentar a parte de ssl no ormconfig.js, pois tive que subir com ssl para o heroku
+require('dotenv/config');
+
+``` javascript
+module.exports = {
+  // ssl: false,
+  // extra: {
+  //   ssl: {
+  //     rejectUnauthorized: false
+  //   },
+  // },
+  type: process.env.DB_TYPE,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_DATABASE,
+  entities: [process.env.DB_ENTITIES],
+  migrations: [process.env.DB_MIGRATIONS],
+  cli: {
+    migrationsDir: process.env.DB_MIGRATIONS_DIR,
+  },
+};
+
+```
+
+Para rodar o projeto usando o docker-compose use os comandos abaixo:
+
+``` bash
+  docker-compose build
+  docker-compose up
+```
+
+![image](https://user-images.githubusercontent.com/26700193/111928621-ebbfb580-8a92-11eb-9bf9-f760759c6b39.png)
+![image](https://user-images.githubusercontent.com/26700193/111928630-fa0dd180-8a92-11eb-896c-8d3654cdd478.png)
+
+### Backend hospedado no Heroku
+Caso quiser testar a API está no heroku também endereço abaixo
+
+https://pebmed.herokuapp.com/
+
 ### Testes 
 
 No backend tem alguns arquivos com a extensão .spec.ts onde se encontra alguns testes de unitários da API
@@ -156,10 +197,6 @@ https://dbdiagram.io/d/60515987ecb54e10c33bc672
 
 ### CI Github Actions
 ![image](https://user-images.githubusercontent.com/26700193/111926216-b2834780-8a8a-11eb-9132-d301d478ea3b.png)
-
-
-### Backend hospedado no Heroku
-https://pebmed.herokuapp.com/
 
 ### Frontend
   
